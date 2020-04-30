@@ -89,10 +89,20 @@ var layer = new ol.layer.Tile({
   })
 });
 
+// this creates a new event that is just shift+drag
+// it will be used a bit further down for the new DragRotate interaction
+ol.events.condition.customDragRotate = function(mapBrowserEvent) {
+  var browserEvent = mapBrowserEvent.originalEvent;
+  return (browserEvent.shiftKey);
+};
 
 
 var map = new ol.Map({
   target: 'map',
+  // adds new DragRotate interaction to the map
+  interactions: ol.interaction.defaults().extend([
+    new ol.interaction.DragRotate({ condition: ol.events.condition.customDragRotate })
+  ]),
   layers: [
     layer,
   ],
@@ -101,6 +111,13 @@ var map = new ol.Map({
     extent: mapExtent,
     maxResolution: mapTileGrid.getResolution(mapMinZoom)
   })
+});
+
+// this removes the default shift+drag zoom
+map.getInteractions().getArray().forEach(function(interaction) {
+  if (interaction instanceof ol.interaction.DragZoom) {
+    map.removeInteraction(interaction);
+  }
 });
 
 map.getView().fit(mapExtent, map.getSize());
