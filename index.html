@@ -15,45 +15,29 @@ html, body { margin:0; padding: 0; height: 100%; width: 100%; }
 body { width:100%; height:100%; background: #F8F8F1; }
 #map { position: absolute; height: 100%; width: 100%; background-color: #F8F8F1; }
 
-  .ol-control {
-    position: absolute;
-    background-color: #f8f8f1;
-    border-radius: 0px;
-    padding: 1px;
-  }
-
-  .ol-attribution button, .ol-attribution ul {
+  div.ol-attribution {
     display: none;
   }
 
-  .instructions {
-    position: absolute;
-    z-index: 100;
-    bottom: 10px;
-    left: 120px;
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0,0,0,0);
-    background-image: url(nav-icons/instructions.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
+  div.ol-rotate.ol-hidden {
+    opacity: 1;
+    visibility: visible;
   }
 
-  .reset {
+  div.instructions {
     position: absolute;
-    z-index: 100;
+    bottom: 10px;
+    left: 120px;
+    background-image: url(nav-icons/instructions.svg);
+  }
+
+  div.reset {
+    position: absolute;
     bottom: 10px;
     left: 10px;
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0,0,0,0);
     background-image: url(nav-icons/reset-regular.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
   }
-  .reset:hover {
+  div.reset:hover {
     background-image: url(nav-icons/reset-hover.svg);
   }
 
@@ -61,81 +45,100 @@ body { width:100%; height:100%; background: #F8F8F1; }
     top: auto;
     bottom: 10px;
     left: auto;
-    right: .5em;
-    background-color: rgba(0,0,0,0);
-  }
-  div.ol-zoom:hover {
-    background-color: rgba(0,0,0,0);
+    right: 10px;
   }
 
-  button.ol-zoom-in, button.ol-zoom-in:focus {
-    width: 100px;
-    height: 100px;
-    outline: 0;
-    text-indent: 1000em;
-    background-color: rgba(0,0,0,0);
+  button.ol-zoom-in,
+  button.ol-zoom-in:focus {
     background-image: url(nav-icons/zoom-in-regular.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
   }
   button.ol-zoom-in:hover {
     background-image: url(nav-icons/zoom-in-hover.svg);
-    background-color: rgba(0,0,0,0);
   }
 
-  button.ol-zoom-out, button.ol-zoom-out:focus {
-    width: 100px;
-    height: 100px;
-    outline: 0;
-    text-indent: 1000em;
-    background-color: rgba(0,0,0,0);
+  button.ol-zoom-out,
+  button.ol-zoom-out:focus {
     background-image: url(nav-icons/zoom-out-regular.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
   }
   button.ol-zoom-out:hover {
     background-image: url(nav-icons/zoom-out-hover.svg);
-    background-color: rgba(0,0,0,0);
   }
 
-  div.ol-rotate, div.ol-rotate:hover {
-    outline: 0;
-    background-color: rgba(0,0,0,0);
-  }
-  div.ol-rotate.ol-hidden {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  button.ol-rotate-reset, button.ol-rotate-reset:focus {
-    width: 100px;
-    height: 100px;
-    outline: 0;
-    background-color: rgba(0,0,0,0);
+  button.ol-rotate-reset,
+  button.ol-rotate-reset:focus {
     background-image: url(nav-icons/arrow-box-regular.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
   }
   button.ol-rotate-reset:hover {
     background-image: url(nav-icons/arrow-box-hover.svg);
-    background-color: rgba(0,0,0,0);
   }
 
-  .ol-compass {
+  span.ol-compass {
     position: absolute;
     top: 33px;
     left: 33px;
-    text-indent: 1000em;
     width: 38px;
     height: 38px;
-    background-color: rgba(0,0,0,0);
     background-image: url(nav-icons/arrow.svg);
+  }
+
+  span.ol-compass,
+  button.ol-rotate-reset,
+  button.ol-rotate-reset:hover,
+  button.ol-rotate-reset:focus,
+  div.ol-rotate.ol-hidden,
+  div.ol-rotate,
+  div.ol-rotate:hover,
+  button.ol-zoom-out,
+  button.ol-zoom-out:hover,
+  button.ol-zoom-out:focus,
+  button.ol-zoom-in,
+  button.ol-zoom-in:hover,
+  button.ol-zoom-in:focus,
+  div.ol-zoom,
+  div.ol-zoom:hover,
+  div.ol-zoom:focus,
+  div.instructions,
+  div.instructions:hover,
+  div.reset,
+  div.reset:hover {
+    outline: 0;
+    z-index: 100;
+    text-indent: 1000em;
+    background-color: rgba(0,0,0,0);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+  }
+
+  button.ol-rotate-reset,
+  button.ol-zoom-out,
+  button.ol-zoom-in,
+  div.instructions,
+  div.reset {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    button.ol-rotate-reset,
+    button.ol-zoom-out,
+    button.ol-zoom-in,
+    div.instructions,
+    div.reset {
+      width: 60px;
+      height: 60px;
+    }
+
+    span.ol-compass {
+      top: 21px;
+      left: 21px;
+      width: 23px;
+      height: 23px;
+    }
+
+    div.instructions {
+      left: 80px;
+    }
   }
 
 </style>
