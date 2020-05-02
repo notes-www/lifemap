@@ -15,11 +15,16 @@ html, body { margin:0; padding: 0; height: 100%; width: 100%; }
 body { width:100%; height:100%; background: #F8F8F1; }
 #map { position: absolute; height: 100%; width: 100%; background-color: #F8F8F1; }
 
-.ol-zoom {
-    top: 50%;
+div.ol-zoom {
+    top: calc(50% - 100px);
     left: auto;
     right: .5em;
+    background-color: rgba(0,0,0,0);
 }
+div.ol-zoom:hover {
+  background-color: rgba(0,0,0,0);
+}
+
 .ol-control {
     position: absolute;
     background-color: #f8f8f1;
@@ -43,24 +48,127 @@ body { width:100%; height:100%; background: #F8F8F1; }
     border: none;
   }
   .ol-attribution button, .ol-attribution ul {
-    color: #F8F8F1;
+    display: none;
   }
-  .ol-control button:hover {
 
-    background-color: #BBD817;
+  .instructions {
+    position: absolute;
+    z-index: 100;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0,0,0,0);
+    background-image: url(nav-icons/instruction-regular.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
   }
-  .ol-control button:focus {
-    background-color: #00AED0;
+  .instructions:hover {
+    background-image: url(nav-icons/instruction-hover.svg);
   }
-    .ol-attribution:not(.ol-collapsed) {
-    background: #F8F8F1;
+
+  .reset {
+    position: absolute;
+    z-index: 100;
+    bottom: 140px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0,0,0,.5);
+/*    background-image: url(nav-icons/instruction-regular.svg); */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
   }
+  .reset:hover {
+/*    background-image: url(nav-icons/instruction-hover.svg); */
+  }
+  .reset::after {
+    content: "reset";
+    color: #fff;
+    font-size: 24px;
+  }
+
+  button.ol-zoom-in, button.ol-zoom-in:focus {
+    width: 100px;
+    height: 100px;
+    outline: 0;
+    text-indent: 1000em;
+    background-color: rgba(0,0,0,0);
+    background-image: url(nav-icons/zoom-in-regular.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+  button.ol-zoom-in:hover {
+    background-image: url(nav-icons/zoom-in-hover.svg);
+    background-color: rgba(0,0,0,0);
+  }
+
+  button.ol-zoom-out, button.ol-zoom-out:focus {
+    width: 100px;
+    height: 100px;
+    outline: 0;
+    text-indent: 1000em;
+    background-color: rgba(0,0,0,0);
+    background-image: url(nav-icons/zoom-out-regular.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+  button.ol-zoom-out:hover {
+    background-image: url(nav-icons/zoom-out-hover.svg);
+    background-color: rgba(0,0,0,0);
+  }
+
+  div.ol-rotate, div.ol-rotate:hover {
+    outline: 0;
+    background-color: rgba(0,0,0,0);
+  }
+  div.ol-rotate.ol-hidden {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  button.ol-rotate-reset, button.ol-rotate-reset:focus {
+    width: 100px;
+    height: 100px;
+    outline: 0;
+    background-color: rgba(0,0,0,0);
+    background-image: url(nav-icons/arrow-box-regular.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+  button.ol-rotate-reset:hover {
+    background-image: url(nav-icons/arrow-box-hover.svg);
+    background-color: rgba(0,0,0,0);
+  }
+
+  .ol-compass {
+    position: absolute;
+    top: 25px;
+    left: 28px;
+    text-indent: 1000em;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0,0,0,0);
+    background-image: url(nav-icons/arrow.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+
 </style>
 
 </head>
 <body>
+
 <div id="map"></div>
-<input id="slider" type="range" min="0" max="1" step="0.1" value="1" oninput="layer.setOpacity(this.value)">
+<div class="instructions"></div>
+<div class="reset" onclick="resetMap()"></div>
+
 <script type="text/javascript">
 var mapExtent = [0.00000000, -16384.00000000, 16384.00000000, 0.00000000];
 var mapMinZoom = 0;
@@ -120,7 +228,14 @@ map.getInteractions().getArray().forEach(function(interaction) {
   }
 });
 
-map.getView().fit(mapExtent, map.getSize());
+function resetMap() {
+  map.getView().fit(mapExtent, map.getSize());
+  map.getView().setZoom(1.5);
+  map.getView().setRotation(0);
+}
+
+resetMap();
+
 </script>
 </body>
 </html>
