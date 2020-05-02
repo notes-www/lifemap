@@ -64,8 +64,8 @@ body { width:100%; height:100%; background: #F8F8F1; }
 <script type="text/javascript">
 var mapExtent = [0.00000000, -16384.00000000, 16384.00000000, 0.00000000];
 var mapMinZoom = 0;
-var mapMaxZoom = 6;
-var mapMaxResolution = 1.00000000;
+var mapMaxZoom = 7;
+var var mapMaxResolution = 0.5;
 var tileExtent = [0.00000000, -16384.00000000, 16384.00000000, 0.00000000];
 
 var mapResolutions = [];
@@ -84,7 +84,7 @@ var layer = new ol.layer.Tile({
   attributions: 'sanjeetahira@gmail.com',
     projection: 'PIXELS',
     tileGrid: mapTileGrid,
-    tilePixelRatio: 1.00000000,
+    tilePixelRatio: 2.00000000,
     url: "{z}/{x}/{-y}.png",
   })
 });
