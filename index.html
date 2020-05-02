@@ -15,52 +15,141 @@ html, body { margin:0; padding: 0; height: 100%; width: 100%; }
 body { width:100%; height:100%; background: #F8F8F1; }
 #map { position: absolute; height: 100%; width: 100%; background-color: #F8F8F1; }
 
-.ol-zoom {
-    top: 50%;
-    left: auto;
-    right: .5em;
-}
-.ol-control {
+  div.ol-attribution {
+    display: none;
+  }
+
+  div.ol-rotate.ol-hidden {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  div.instructions {
     position: absolute;
-    background-color: #f8f8f1;
-    border-radius: 0px;
-    padding: 1px;
+    bottom: 10px;
+    left: 120px;
+    background-image: url(nav-icons/instructions.svg);
+  }
 
-}
-.ol-control button {
-    display: block;
-    margin: 1px;
-    padding: 0;
-    color: #F8F8F1;
-    font-size: 1.5em;
-    font-weight: 700;
-    text-decoration: none;
-    text-align: center;
-    height: 1.5em;
-    width: 1.5em;
-    line-height: .4em;
-    background-color: #00AED0;
-    border: none;
+  div.reset {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-image: url(nav-icons/reset-regular.svg);
   }
-  .ol-attribution button, .ol-attribution ul {
-    color: #F8F8F1;
+  div.reset:hover {
+    background-image: url(nav-icons/reset-hover.svg);
   }
-  .ol-control button:hover {
 
-    background-color: #BBD817;
+  div.ol-zoom {
+    top: auto;
+    bottom: 10px;
+    left: auto;
+    right: 10px;
   }
-  .ol-control button:focus {
-    background-color: #00AED0;
+
+  button.ol-zoom-in,
+  button.ol-zoom-in:focus {
+    background-image: url(nav-icons/zoom-in-regular.svg);
   }
-    .ol-attribution:not(.ol-collapsed) {
-    background: #F8F8F1;
+  button.ol-zoom-in:hover {
+    background-image: url(nav-icons/zoom-in-hover.svg);
   }
+
+  button.ol-zoom-out,
+  button.ol-zoom-out:focus {
+    background-image: url(nav-icons/zoom-out-regular.svg);
+  }
+  button.ol-zoom-out:hover {
+    background-image: url(nav-icons/zoom-out-hover.svg);
+  }
+
+  button.ol-rotate-reset,
+  button.ol-rotate-reset:focus {
+    background-image: url(nav-icons/arrow-box-regular.svg);
+  }
+  button.ol-rotate-reset:hover {
+    background-image: url(nav-icons/arrow-box-hover.svg);
+  }
+
+  span.ol-compass {
+    position: absolute;
+    top: 33px;
+    left: 33px;
+    width: 38px;
+    height: 38px;
+    background-image: url(nav-icons/arrow.svg);
+  }
+
+  span.ol-compass,
+  button.ol-rotate-reset,
+  button.ol-rotate-reset:hover,
+  button.ol-rotate-reset:focus,
+  div.ol-rotate.ol-hidden,
+  div.ol-rotate,
+  div.ol-rotate:hover,
+  button.ol-zoom-out,
+  button.ol-zoom-out:hover,
+  button.ol-zoom-out:focus,
+  button.ol-zoom-in,
+  button.ol-zoom-in:hover,
+  button.ol-zoom-in:focus,
+  div.ol-zoom,
+  div.ol-zoom:hover,
+  div.ol-zoom:focus,
+  div.instructions,
+  div.instructions:hover,
+  div.reset,
+  div.reset:hover {
+    outline: 0;
+    z-index: 100;
+    text-indent: 1000em;
+    background-color: rgba(0,0,0,0);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+
+  button.ol-rotate-reset,
+  button.ol-zoom-out,
+  button.ol-zoom-in,
+  div.instructions,
+  div.reset {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    button.ol-rotate-reset,
+    button.ol-zoom-out,
+    button.ol-zoom-in,
+    div.instructions,
+    div.reset {
+      width: 60px;
+      height: 60px;
+    }
+
+    span.ol-compass {
+      top: 21px;
+      left: 21px;
+      width: 23px;
+      height: 23px;
+    }
+
+    div.instructions {
+      left: 80px;
+    }
+  }
+
 </style>
 
 </head>
 <body>
+
 <div id="map"></div>
-<input id="slider" type="range" min="0" max="1" step="0.1" value="1" oninput="layer.setOpacity(this.value)">
+<div class="instructions"></div>
+<div class="reset" onclick="resetMap()"></div>
+
 <script type="text/javascript">
 var mapExtent = [0.00000000, -16384.00000000, 16384.00000000, 0.00000000];
 var mapMinZoom = 0;
@@ -120,7 +209,14 @@ map.getInteractions().getArray().forEach(function(interaction) {
   }
 });
 
-map.getView().fit(mapExtent, map.getSize());
+function resetMap() {
+  map.getView().fit(mapExtent, map.getSize());
+  map.getView().setZoom(1.5);
+  map.getView().setRotation(0);
+}
+
+resetMap();
+
 </script>
 </body>
 </html>
